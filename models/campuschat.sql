@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2015 at 09:17 PM
+-- Generation Time: Apr 25, 2015 at 09:51 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `campuschat`
 --
+CREATE DATABASE IF NOT EXISTS `campuschat` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `campuschat`;
 
 -- --------------------------------------------------------
 
@@ -37,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `campuschat_contacts` (
 
 INSERT INTO `campuschat_contacts` (`user_sender`, `user_receiver`) VALUES
 (1, 2),
+(1, 3),
 (2, 1);
 
 -- --------------------------------------------------------
