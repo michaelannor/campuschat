@@ -37,8 +37,7 @@ CREATE TABLE IF NOT EXISTS `campuschat_contacts` (
 
 INSERT INTO `campuschat_contacts` (`user_sender`, `user_receiver`) VALUES
 (1, 2),
-(2, 1),
-(1, 3);
+(2, 1);
 
 -- --------------------------------------------------------
 
