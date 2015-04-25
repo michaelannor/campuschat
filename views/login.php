@@ -6,7 +6,13 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<<<<<<< HEAD
 
+=======
+    </head>
+
+    <body class="teal darken-1">
+>>>>>>> fredrickBranch
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="../assets/js/jquery-2.1.3.min.js"></script>
       <script type="text/javascript" src="../assets/js/materialize.js"></script>
