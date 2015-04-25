@@ -47,7 +47,7 @@ Class USERS extends adb
                         LIMIT 1";
         if ( !$this->query ( $str_sql ) )
         {
-            return mysql_error();
+            return mysql_error($this);
         }
         return $this->fetch ( $str_sql );
     }//end of user_login()
