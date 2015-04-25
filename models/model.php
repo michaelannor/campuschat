@@ -51,4 +51,12 @@ Class USERS extends adb
         $this->fetch ( $str_sql );
     }//end of user_login()
     
+    /*
+     * Function to display list of users connection
+     */
+    function display_users_contacts ( )
+    {
+        
+    }
+    
 }//end of USERS
