@@ -32,7 +32,7 @@ if ( isset ( $_REQUEST [ 'cmd' ] ) )
 
 
 /*
- * Function to 
+ * Function to control
  */
 function user_login_control ( )
 {
@@ -49,8 +49,8 @@ function user_login_control ( )
         else
         {
             session_start ( );
-            $user_id = $row['user_id'];
-            $_SESSION['user_id'] = $user_id;
+            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['user_id'] = $row['username'];
             echo '{"result":1, "message":"Correct Details"}';
         }
     }
