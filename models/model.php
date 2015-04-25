@@ -41,9 +41,9 @@ Class USERS extends adb
     function user_login ( $username, $password )
     {
         $str_sql = "SELECT username, password 
-                        from campuschat_users
-                        where campuschat_users.username='$username'
-                        and campuschat_users.password=MD5('$password')
+                        FROM campuschat_users
+                        WHERE campuschat_users.username='$username'
+                        AND campuschat_users.password=MD5('$password')
                         LIMIT 1";
         if ( !$this->query ( $str_sql ) )
         {
@@ -51,6 +51,7 @@ Class USERS extends adb
         }
         $this->fetch ( $str_sql );
     }//end of user_login()
+    
     
     /*
      * Function to display list of users connection

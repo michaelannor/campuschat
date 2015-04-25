@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2015 at 09:03 PM
+-- Generation Time: Apr 25, 2015 at 09:17 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -37,7 +37,8 @@ CREATE TABLE IF NOT EXISTS `campuschat_contacts` (
 
 INSERT INTO `campuschat_contacts` (`user_sender`, `user_receiver`) VALUES
 (1, 2),
-(2, 1);
+(2, 1),
+(1, 3);
 
 -- --------------------------------------------------------
 
@@ -52,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `campuschat_messages` (
   `msg_receiver` int(50) NOT NULL,
   `msg_type` enum('TEXT','PICTURE','VIDEO') NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `campuschat_messages`
@@ -60,7 +61,8 @@ CREATE TABLE IF NOT EXISTS `campuschat_messages` (
 
 INSERT INTO `campuschat_messages` (`msg_id`, `msg_text`, `msg_sender`, `msg_receiver`, `msg_type`, `timestamp`) VALUES
 (1, 'Hello Micheal this is prototype text.', 1, 2, 'TEXT', '2015-04-25 18:49:04'),
-(2, 'Hi Fredrick got your prototype text.', 2, 1, 'TEXT', '2015-04-25 18:49:04');
+(2, 'Hi Fredrick got your prototype text.', 2, 1, 'TEXT', '2015-04-25 18:49:04'),
+(3, 'Fred I did not get the prototype message.', 3, 1, 'TEXT', '2015-04-25 19:16:40');
 
 -- --------------------------------------------------------
 
@@ -74,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `campuschat_users` (
   `password` varchar(35) NOT NULL,
   `profile_pic` text NOT NULL,
   `status` enum('ONLINE','OFFLINE') NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `campuschat_users`
@@ -82,7 +84,8 @@ CREATE TABLE IF NOT EXISTS `campuschat_users` (
 
 INSERT INTO `campuschat_users` (`user_id`, `username`, `password`, `profile_pic`, `status`) VALUES
 (1, 'fredrick.abayie', '1abc7eda679aa56fa6d9b65ad978dc4a', '', 'ONLINE'),
-(2, 'micheal.annor', '061f107403560b468376f8cb1c9589ec', '', 'ONLINE');
+(2, 'micheal.annor', '061f107403560b468376f8cb1c9589ec', '', 'ONLINE'),
+(3, 'kenneth.mensah', '19f3158fc4c6850f1c24ff13d485e6e9', '', 'ONLINE');
 
 --
 -- Indexes for dumped tables
@@ -114,12 +117,12 @@ ALTER TABLE `campuschat_users`
 -- AUTO_INCREMENT for table `campuschat_messages`
 --
 ALTER TABLE `campuschat_messages`
-MODIFY `msg_id` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `msg_id` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `campuschat_users`
 --
 ALTER TABLE `campuschat_users`
-MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
