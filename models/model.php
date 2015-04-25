@@ -56,7 +56,7 @@ Class USERS extends adb
      */
     function display_users_contacts ( )
     {
-        
+        $str_sql = "";
     }
     
 }//end of USERS
