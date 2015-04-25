@@ -2,19 +2,19 @@
   <html>
     <head>
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="../assets/css/materialize.min.css"  media="screen,projection"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-      
-   
-      
+
+
+
     </head>
 
     <body class="teal darken-1">
       <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="jquery-2.1.3.min.js"></script>
-      <script type="text/javascript" src="js/materialize.js"></script>
+      <script type="text/javascript" src="../assets/js/jquery-2.1.3.min.js"></script>
+      <script type="text/javascript" src="../assets/js/materialize.js"></script>
 
 
       <div class="row">
@@ -40,12 +40,12 @@
                            <h5>Log In</h5>
                             </div>
                           <div class="input-field col s12">
-                           
+
 
                             <input id="username" type="text" class="validate">
                             <label for="username">Username</label>
                           </div>
-                        
+
 
                           <div class="input-field col s12">
                             <input id="password" type="password" class="validate">
