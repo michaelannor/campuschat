@@ -19,7 +19,7 @@ if ( isset ( $_REQUEST [ 'cmd' ] ) )
          case 1:
              user_login_control ( );
              break;
-         
+
          case 2:
              display_users_contact_control ( );
              break;
@@ -31,13 +31,6 @@ if ( isset ( $_REQUEST [ 'cmd' ] ) )
 }
 
 
-/*
-<<<<<<< HEAD
- * Function to
-=======
- * Function to control
->>>>>>> fredrickBranch
- */
 function user_login_control ( )
 {
     if ( isset ( $_REQUEST['username'] ) && isset ( $_REQUEST['password'] ) )
@@ -59,8 +52,7 @@ function user_login_control ( )
         }
     }
 }//end of user_login()
-<<<<<<< HEAD
-=======
+
 
 
 /*
@@ -94,4 +86,3 @@ function display_users_contact_control ( )
         }
     }
 }//end of display_users_contact()
->>>>>>> fredrickBranch
