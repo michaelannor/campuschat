@@ -40,10 +40,15 @@ Class USERS extends adb
      */
     function user_login ( $username, $password )
     {
-        $str_sql = "SELECT username and password"
-                . "where username='$username' and password='$password'";
-        $this->query ( $str_sql );
-        
+        $str_sql = "SELECT username, password"
+                     . "where campuschat.username='$username'"
+                     . " and campuschat.password=MD5('$password')"
+                     . "LIMIT 1";
+        if ( !$this->query ( $str_sql ) )
+        {
+            return mysql_error ( $this );
+        }
+        $this->fetch ( $str_sql );
     }//end of user_login()
     
 }//end of USERS
