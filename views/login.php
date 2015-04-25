@@ -7,7 +7,13 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="../assets/js/jquery-2.1.3.min.js"></script>
+      <script type="text/javascript" src="../assets/js/materialize.js"></script>
+
+
       <script>
+
         function sendRequest(u){
           // Send request to server
           //u a url as a string
@@ -19,19 +25,30 @@
         }
 
         function validateLogin(user, pass){
-				var theUrl="controller.php?cmd=1&id="+id;
+				var theUrl="../controllers/controller.php?cmd=1&username="+user+"&password="+pass;
 				var obj=sendRequest(theUrl);		//send request to the above url
 				if(obj.result==1){					//check result
-					$("#divDesc").text(obj.desc);		//set div with the description from the result
-					$("#divDesc").css("top",event.y);	//set the location of the div
-					$("#divDesc").css("left",event.x);
-					$("#divDesc").show();				//show the div element
+          window.location.replace("home.php");
+					//$("#divDesc").text(obj.desc);		//set div with the description from the result
+					//$("#divDesc").css("top",event.y);	//set the location of the div
+					//$("#divDesc").css("left",event.x);
+					//$("#divDesc").show();				//show the div element
 				}else{
 					//show error message
-					$("#divStatus").text("error while getting description");
-					$("#divStatus").css("backgroundColor","red");
+          alert("login failed");
+					// $("#divStatus").text("error while getting description");
+					// $("#divStatus").css("backgroundColor","red");
 				}
 			}
+
+      $(function(){
+        $("#loginbtn").click(function(){
+
+          console.log($("#username").val());
+
+          validateLogin($("#username").val(), $("#password").val())
+        });
+      });
 
 
       </script>
@@ -39,9 +56,6 @@
     </head>
 
     <body class="teal darken-1">
-      <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="../assets/js/jquery-2.1.3.min.js"></script>
-      <script type="text/javascript" src="../assets/js/materialize.js"></script>
 
 
       <div class="row">
@@ -80,7 +94,7 @@
                           </div>
                                                     <div class="input-field col s12">
 
-                                                     <h6 id="loginbtn" style="float:right;"><a href="home.html" style="color: #009688 !important; ">LOGIN</a></h6><span>    </span> <h6 style="float:right; padding-right:30px;" class="grey-text"> CANCEL    </h6>
+                                                     <h6 id="loginbtn" style="float:right;"><span style="color: #009688 !important; ">LOGIN</span></h6><span>    </span> <h6 style="float:right; padding-right:30px;" class="grey-text"> CANCEL    </h6>
 
                             </div>
                         </div>
