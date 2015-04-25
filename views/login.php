@@ -6,13 +6,36 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> fredrickBranch
-=======
->>>>>>> fredrickBranch
+      <script>
+        function sendRequest(u){
+          // Send request to server
+          //u a url as a string
+          //async is type of request
+          var obj=$.ajax({url:u,async:false});
+          //Convert the JSON string to object
+          var result=$.parseJSON(obj.responseText);
+          return result;	//return object
+        }
+
+        function validateLogin(user, pass){
+				var theUrl="controller.php?cmd=1&id="+id;
+				var obj=sendRequest(theUrl);		//send request to the above url
+				if(obj.result==1){					//check result
+					$("#divDesc").text(obj.desc);		//set div with the description from the result
+					$("#divDesc").css("top",event.y);	//set the location of the div
+					$("#divDesc").css("left",event.x);
+					$("#divDesc").show();				//show the div element
+				}else{
+					//show error message
+					$("#divStatus").text("error while getting description");
+					$("#divStatus").css("backgroundColor","red");
+				}
+			}
+
+
+      </script>
+
     </head>
 
     <body class="teal darken-1">
