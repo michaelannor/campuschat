@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+<?php
+session_start();
+ 	if(!isset($_SESSION['user_id'])){
+ 		header("location: login.php");
+ 		//echo "hello there you";
+ 		exit();
+ 	}
+
+ ?>
+
+ <!DOCTYPE html>
  <html>
    <head>
      <!--Import materialize.css-->

@@ -85,4 +85,6 @@ function display_users_contact_control ( )
              echo '{"result":0,"message":"Failed to display contacts"}';
         }
     }
+
 }//end of display_users_contact()
+
