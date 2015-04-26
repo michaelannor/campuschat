@@ -42,4 +42,6 @@ Class MESSAGES extends adb
         
         return $this->query($str_sql);
     }
+    
+    
 }
