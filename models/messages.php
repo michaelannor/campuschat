@@ -14,7 +14,7 @@ include_once 'adb.php';
 /*
  * Creating the class for users
  */
-Class CONTACTS extends adb
+Class MESSAGES extends adb
 {
     
     /*
@@ -35,18 +35,11 @@ Class CONTACTS extends adb
     }//end of _destruct()
     
     
-    /*
-     * Function to display list of users connection
-     */
-    function display_users_contacts($user_id )
-    {
-        $str_sql = "SELECT user_receiver
-                FROM campuschat_contacts
-                where user_sender = $user_id";
+    function get_user_messages($msg_sender, $msg_receiver){
+        
+        $str_sql = "SELECT * from campuschat_messages where
+                   msg_sender = $msg_sender and msg_receiver = $msg_receiver";
         
         return $this->query($str_sql);
     }
-    
-    
-    
 }

@@ -47,7 +47,7 @@ Class USERS extends adb
                         LIMIT 1";
         if ( !$this->query ( $str_sql ) )
         {
-            return mysql_error();
+            return mysql_error($this);
         }
         return $this->fetch ( $str_sql );
     }//end of user_login()
@@ -55,16 +55,16 @@ Class USERS extends adb
     /*
      * Function to get users profile information
      */
-    
+
     function get_user_profile($user_id){
        $str_sql = "SELECT username, profile_pic 
                         FROM campuschat_users
                         WHERE user_id = $user_id"; 
        
        return $this->query($str_sql);
+
     }
  
-    
     /*
      * Function to edit a users profile
      */
@@ -112,8 +112,3 @@ Class USERS extends adb
 // else {
 //    echo 'could not ';
 //}
-
-
-
-
-
