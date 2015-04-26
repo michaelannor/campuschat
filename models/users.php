@@ -53,11 +53,64 @@ Class USERS extends adb
     }//end of user_login()
     
     /*
-     * Function to display list of users connection
+     * Function to get users profile information
      */
     function display_users_contacts ( $user_id )
     {
         $str_sql = "";
+    function get_user_profile($user_id){
+       $str_sql = "SELECT username, profile_pic 
+                        FROM campuschat_users
+                        WHERE user_id = $user_id"; 
+       
+       return $this->query($str_sql);
+    }
     }
     
+    /*
+     * Function to edit a users profile
+     */
+    function edit_user($user_id, $username, $password, $profile_pic){
+        $str_sql = "UPDATE campuschat_users SET
+                    username = '$username',
+                    password = MD5('$password'), 
+                    profile_pic = '$profile_pic' 
+                    WHERE user_id = $user_id";
+        
+         return $this->query($str_sql);
+    }
+    
+    /*
+     * Function to search for a users 
+     */
+    
+    function search_user($st){
+        $str_sql = "SELECT username, profile_pic 
+                        FROM campuschat_users
+                        WHERE username LIKE '%$st%'";
+        
+        return $this->query($str_sql);
+    }
+       
 }//end of USERS
+
+//include_once 'contacts.php';
+//$obj1 = new USERS();
+//$obj2 = new CONTACTS();
+//
+//
+//if($obj2->display_users_contacts(1)){
+//    
+//    while($row = $obj2->fetch()){
+//        //echo $row['user_receiver'];
+//        $receiver = intval($row['user_receiver']);
+//        echo $receiver ;
+//        $obj1->get_user_profile($receiver);
+//        $row1 = $obj1->fetch();
+//        echo $row1['username']. "<br>";
+//
+//    }
+//}
+// else {
+//    echo 'could not ';
+//}
