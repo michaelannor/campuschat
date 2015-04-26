@@ -60,7 +60,15 @@ session_start();
 
          <!-- Contact Tab Contents -->
          <div id="contacts" class="col s12">
-
+           <div class="row">
+             <div class="col s12 m12">
+               <div class="card-panel">
+                 <span class="teal-text">
+                   <h6>Contact Name</h6>
+                 </span>
+               </div>
+             </div>
+            </div>
          </div>
 
        </div>
