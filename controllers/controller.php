@@ -13,7 +13,7 @@
 if ( filter_input ( INPUT_GET, 'cmd' ) )
 {
      $cmd = filter_input ( INPUT_GET, 'cmd' );     //Storing the command into a variable
-     
+
      switch ( $cmd )
      {
          case 1:
@@ -22,8 +22,8 @@ if ( filter_input ( INPUT_GET, 'cmd' ) )
 
          case 2:
              user_contacts_control ( );          //Call to the user_contacts_control function
-             break;    
-         
+             break;
+
          case 3:
              edit_user_control ( );
              break;
@@ -37,10 +37,9 @@ if ( filter_input ( INPUT_GET, 'cmd' ) )
 
 
 /*
- * Function to 
+ * Function to
  */
 function get_user_model( )
->>>>>>> fredrickBranch
 {
     include_once '../models/users.php';     //Including the file users.php
     $obj = new USERS ( );       //Creating an instance of the class users in users.php
@@ -52,7 +51,7 @@ function get_user_model( )
  * Function to control the users login
  */
 function user_login_control ( )
-{ 
+{
     //Checking if username and password is set before proceeding
     if ( filter_input ( INPUT_GET,'username') && filter_input ( INPUT_GET,'password' ) )
     {
@@ -74,7 +73,7 @@ function user_login_control ( )
     }
     else
     {
-        echo '{"result":0, "message":"Username and Password not set"}'; 
+        echo '{"result":0, "message":"Username and Password not set"}';
     }
 }//end of user_login()
 
@@ -100,7 +99,7 @@ function user_contacts_control ( )
            while ( $row )
            {
                $receiver_id = intval ( $row['user_receiver'] );
-               
+
                if ( $obj1->get_user_profile ( $receiver_id ) )
                {
                    while ( $row1 =  $obj1->fetch ( ) )
@@ -142,7 +141,7 @@ function edit_user_control ( )
         $username = filter_input ( INPUT_GET, 'username' );
         $password = filter_input ( INPUT_GET, 'password' );
         $profile_pic = filter_input ( INPUT_GET, 'profile_pic' );
-        
+
         if ( $obj->edit_user ( $user_id, $username, $password, $profile_pic ) )
         {
             echo '{"result":1,"message":"User profile successfully updated"}';
@@ -154,7 +153,6 @@ function edit_user_control ( )
     }
     else
     {
-        echo '{"result":0,"message":"All fields are not set"}';        
+        echo '{"result":0,"message":"All fields are not set"}';
     }
 }//end of edit_user_control()
-
