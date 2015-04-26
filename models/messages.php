@@ -35,6 +35,9 @@ Class MESSAGES extends adb
     }//end of _destruct()
     
     
+    /*
+     * Function to get the messages of between a sender and a user
+     */
     function get_user_messages($msg_sender, $msg_receiver){
         
         $str_sql = "SELECT * from campuschat_messages where
@@ -43,5 +46,26 @@ Class MESSAGES extends adb
         return $this->query($str_sql);
     }
     
+    /*
+     * Function to delete messages from a particular user
+     */
+    function delete_user_messages($msg_sender, $msg_receiver){
+        $str_sql = "DELETE from campuschat_messages where
+                   msg_sender = $msg_sender and msg_receiver = $msg_receiver";
+        
+        return $this->query($str_sql);
+    }
     
+    /*
+     * Function to send meseeages
+     */
+    function send_message($msg_text, $msg_sender, $msg_receiver, $msg_type){
+        $str_sql = "INSERT into campuschat_messages SET
+                   msg_text = '$msg_text',
+                   msg_sender =  $msg_sender,
+                   msg_receiver = $msg_receiver,
+                   msg_type = $msg_type ";
+        
+        return $this->query($str_sql);
+    }
 }
