@@ -99,7 +99,11 @@ function user_contacts_control ( )
         include_once '../models/contacts.php';
         $obj2 = new CONTACTS ( );
         $obj1 = get_user_model ( );
+
 //        $user_id = filter_input (INPUT_GET, 'id');
+
+        // $user_id = filter_input (INPUT_GET, 'id');
+
         $user_id = $_SESSION['user_id'];        //Retrieving the value in the session and assigning it to a new variable
         if ( $obj2->display_users_contacts ( $user_id ) )
           {

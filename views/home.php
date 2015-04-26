@@ -7,7 +7,6 @@ session_start();
    else{
     //  echo $_SESSION['user_id'];
    }
-
  ?>
 
  <!DOCTYPE html>
