@@ -22,10 +22,7 @@ if ( isset ( $_REQUEST [ 'cmd' ] ) )
          
          case 2:
              user_contacts_control ( );          //Call to the user_contacts_control function
-             break;
-         
-         case 3:
-             
+             break;            
 
          default :
              echo '{"result":0, "message": "Invalid Command Entered"}';
