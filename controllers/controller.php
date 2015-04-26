@@ -27,6 +27,10 @@ if ( filter_input ( INPUT_GET, 'cmd' ) )
          case 3:
              edit_user_control ( );
              break;
+         
+         case 4:
+             search_user_control ( );
+             break;
 
          default :
              echo '{"result":0, "message": "Invalid Command Entered"}';
@@ -37,7 +41,7 @@ if ( filter_input ( INPUT_GET, 'cmd' ) )
 
 
 /*
- * Function to
+ * Function to create an instance of the users class
  */
 function get_user_model( )
 {
@@ -85,13 +89,14 @@ function user_login_control ( )
  */
 function user_contacts_control ( )
 {
+    session_start();
     if ( isset ( $_SESSION['user_id'] ) )
     {
         include_once '../models/contacts.php';
         $obj2 = new CONTACTS ( );
         $obj1 = get_user_model ( );
-        $user_id = filter_input (INPUT_GET, 'id');
-        //$user_id = $_SESSION['user_id'];        //Retrieving the value in the session and assigning it to a new variable
+//        $user_id = filter_input (INPUT_GET, 'id');
+        $user_id = $_SESSION['user_id'];        //Retrieving the value in the session and assigning it to a new variable
         if ( $obj2->display_users_contacts ( $user_id ) )
           {
            $row = $obj2->fetch ( );       //Fetching the result
@@ -133,6 +138,7 @@ function user_contacts_control ( )
  */
 function edit_user_control ( )
 {
+    session_start();
     if ( isset ( $_SESSION['user_id'] ) && filter_input (INPUT_GET, 'uername') &&
          filter_input (INPUT_GET, 'password') &&filter_input (INPUT_GET, 'profile_pic'))
     {
@@ -143,7 +149,7 @@ function edit_user_control ( )
         $profile_pic = filter_input ( INPUT_GET, 'profile_pic' );
 
         if ( $obj->edit_user ( $user_id, $username, $password, $profile_pic ) )
-        {
+        { 
             echo '{"result":1,"message":"User profile successfully updated"}';
         }
         else
@@ -156,3 +162,13 @@ function edit_user_control ( )
         echo '{"result":0,"message":"All fields are not set"}';
     }
 }//end of edit_user_control()
+
+
+/*
+ * Function to control the searching of a new user
+ */
+function search_user_control ( )
+{
+    session_start();
+    $obj = get_user_model( );
+}//search_user_control()
