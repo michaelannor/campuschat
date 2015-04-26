@@ -60,16 +60,31 @@ session_start();
 
          <!-- Contact Tab Contents -->
          <div id="contacts" class="col s12">
-           <div class="row">
-             <div class="col s12 m12">
-               <div class="card-panel">
-                 <span class="teal-text">
-                   <h6>Contact Name</h6>
-                 </span>
-               </div>
-             </div>
+
+          <div class="section col s12">
+            <div class="contactcardimg col s2">
+                <img src="../assets/img/test.jpg" alt="" class="circle responsive-img">
             </div>
-         </div>
+
+            <div class="contactcardtext col s10">
+              <h6 class="teal-text">Contact Name 2</h6>
+              <p>Status: Offline</p>
+            </div>
+            <div class="divider col s12"></div><br><br><br><br>
+          </div>
+
+
+          <div class="section col s12">
+            <div class="contactcardimg col s2">
+                <img src="../assets/img/test.jpg" alt="" class="circle responsive-img">
+            </div>
+
+            <div class="contactcardtext col s10">
+              <h6 class="teal-text">Contact Name 2</h6>
+              <p>Status: Offline</p>
+            </div>
+            <div class="divider col s12"></div><br><br><br><br>
+          </div>
 
        </div>
      </div>
