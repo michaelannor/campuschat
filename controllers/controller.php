@@ -22,6 +22,10 @@ if ( isset ( $_REQUEST [ 'cmd' ] ) )
          
          case 2:
              user_contacts_control ( );          //Call to the user_contacts_control function
+             break;
+         
+         case 3:
+             
 
          default :
              echo '{"result":0, "message": "Invalid Command Entered"}';
@@ -78,17 +82,30 @@ function user_login_control ( )
  */
 function user_contacts_control ( )
 {
-    if ( isset ( $_SESSION ) )
+    if ( isset ( $_SESSION['user_id'] ) )
     {
-        $obj = get_user_model ( );
+        include_once '../models/contacts.php';
+        $obj2 = new CONTACTS ( );
+        $obj1 = get_user_model ( );
+//        $user_id = $_REQUEST['id'];
         $user_id = $_SESSION['user_id'];        //Retrieving the value in the session and assigning it to a new variable
-        if ( $obj->display_users_contacts ( $user_id ) ){
-           $row = $obj->fetch ( );      //Fetching the result
+        if ( $obj2->display_users_contacts ( $user_id ) )
+          {
+           $row = $obj2->fetch ( );       //Fetching the result
            echo '{"result":1,"contacts": [';
            while ( $row )
            {
-               json_encode($row);       //Converting the row to a json format
-               if ( $row = $obj->fetch ( ) )
+               $receiver_id = intval ( $row['user_receiver'] );
+               
+               if ( $obj1->get_user_profile ( $receiver_id ) )
+               {
+                   while ( $row1 =  $obj1->fetch ( ) )
+                   {
+                       echo '{"user_id":"'.$row['user_receiver'].'", "username":"'.$row1['username'].'"}';
+                   }
+               }
+
+               if ( $row = $obj2->fetch ( ) )
                {
                    echo ',';
                }
@@ -99,5 +116,9 @@ function user_contacts_control ( )
         {
              echo '{"result":0,"message":"Failed to display contacts"}';        //Showing an error message in json format
         }
+    }
+    else
+    {
+        echo '{"result":0,"message":"Session for user id is not set"}';
     }
 }//end of display_users_contact()
