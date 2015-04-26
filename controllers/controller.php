@@ -10,9 +10,9 @@
 /*
  * Checking if a command is set before proceeding
  */
-if ( isset ( $_REQUEST [ 'cmd' ] ) )
+if ( filter_input ( INPUT_GET, 'cmd' ) )
 {
-     $cmd = $_REQUEST[ 'cmd' ];     //Storing the command into a variable
+     $cmd = filter_input ( INPUT_GET, 'cmd' );     //Storing the command into a variable
      
      switch ( $cmd )
      {
@@ -22,7 +22,11 @@ if ( isset ( $_REQUEST [ 'cmd' ] ) )
          
          case 2:
              user_contacts_control ( );          //Call to the user_contacts_control function
-             break;            
+             break;    
+         
+         case 3:
+             edit_user_control ( );
+             break;
 
          default :
              echo '{"result":0, "message": "Invalid Command Entered"}';
@@ -48,11 +52,11 @@ function get_user_model( )
 function user_login_control ( )
 { 
     //Checking if username and password is set before proceeding
-    if ( isset ( $_REQUEST['username'] ) && isset ( $_REQUEST['password'] ) )
+    if ( filter_input ( INPUT_GET,'username') && filter_input ( INPUT_GET,'password' ) )
     {
         $obj = get_user_model ( );
-        $username = $_REQUEST['username'];      //Getting the username from the url
-        $password = $_REQUEST['password'];      //Getting the password from the url
+        $username = filter_input (INPUT_GET,'username');      //Getting the username from the url
+        $password = filter_input ( INPUT_GET,'password');      //Getting the password from the url
         $row = $obj->user_login ( $username, $password );
         if ( !$row )
         {
@@ -84,8 +88,8 @@ function user_contacts_control ( )
         include_once '../models/contacts.php';
         $obj2 = new CONTACTS ( );
         $obj1 = get_user_model ( );
-//        $user_id = $_REQUEST['id'];
-        $user_id = $_SESSION['user_id'];        //Retrieving the value in the session and assigning it to a new variable
+        $user_id = filter_input (INPUT_GET, 'id');
+        //$user_id = $_SESSION['user_id'];        //Retrieving the value in the session and assigning it to a new variable
         if ( $obj2->display_users_contacts ( $user_id ) )
           {
            $row = $obj2->fetch ( );       //Fetching the result
@@ -119,3 +123,33 @@ function user_contacts_control ( )
         echo '{"result":0,"message":"Session for user id is not set"}';
     }
 }//end of display_users_contact()
+
+
+/*
+ * Function to control the editing of a users profile
+ */
+function edit_user_control ( )
+{
+    if ( isset ( $_SESSION['user_id'] ) && filter_input (INPUT_GET, 'uername') &&
+         filter_input (INPUT_GET, 'password') &&filter_input (INPUT_GET, 'profile_pic'))
+    {
+        $obj = get_user_model( );
+        $user_id = $_SESSION['user_id'];
+        $username = filter_input ( INPUT_GET, 'username' );
+        $password = filter_input ( INPUT_GET, 'password' );
+        $profile_pic = filter_input ( INPUT_GET, 'profile_pic' );
+        
+        if ( $obj->edit_user ( $user_id, $username, $password, $profile_pic ) )
+        {
+            echo '{"result":1,"message":"User profile successfully updated"}';
+        }
+        else
+        {
+            echo '{"result":0,"message":"Failed to update user profile"}';
+        }
+    }
+    else
+    {
+        echo '{"result":0,"message":"All fields are not set"}';        
+    }
+}//end of edit_user_control()
