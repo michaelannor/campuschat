@@ -89,7 +89,7 @@ function user_login_control ( )
  */
 function user_contacts_control ( )
 {
-    session_start();
+  session_start();
     if ( isset ( $_SESSION['user_id'] ) )
     {
         include_once '../models/contacts.php';
