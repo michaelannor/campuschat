@@ -40,21 +40,22 @@ Class USERS extends adb
      */
     function user_login ( $username, $password )
     {
-        $str_sql = "SELECT username, password 
+        $str_sql = "SELECT user_id, username, password
                         FROM campuschat_users
                         WHERE campuschat_users.username='$username'
                         AND campuschat_users.password=MD5('$password')
                         LIMIT 1";
         if ( !$this->query ( $str_sql ) )
         {
-            return mysql_error ( $this );
+            return mysql_error();
         }
-        $this->fetch ( $str_sql );
+        return $this->fetch ( $str_sql );
     }//end of user_login()
     
     /*
      * Function to get users profile information
      */
+    
     function get_user_profile($user_id){
        $str_sql = "SELECT username, profile_pic 
                         FROM campuschat_users
@@ -62,6 +63,7 @@ Class USERS extends adb
        
        return $this->query($str_sql);
     }
+ 
     
     /*
      * Function to edit a users profile
