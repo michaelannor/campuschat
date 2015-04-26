@@ -13,10 +13,11 @@
 //define("DB_PWORD","Ashesi@2016?");
 
 define("DB_HOST", 'localhost');
-define("DB_NAME", 'csashesi_fredrick-abayie');
+//define("DB_NAME", 'csashesi_fredrick-abayie');
+define("DB_NAME", 'campuschat');
 define("DB_PORT", 3306);
-define("DB_USER","csashesi_fa16");
-define("DB_PWORD","db!hEi2As");
+define("DB_USER","root");
+define("DB_PWORD","");
 
 define("LOG_LEVEL_SEC",0);
 define("LOG_LEVEL_DB_FAIL",0);
