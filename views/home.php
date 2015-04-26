@@ -74,7 +74,7 @@ session_start();
           </div>
 
 
-          <div class="section col s12">
+          <div class="section row valign-wrapper col s12">
             <div class="contactcardimg col s2">
                 <img src="../assets/img/test.jpg" alt="" class="circle responsive-img">
             </div>
