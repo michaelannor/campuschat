@@ -10,32 +10,32 @@
 /*
  * Checking if a command is set before proceeding
  */
-if ( filter_input ( INPUT_GET, 'cmd' ) )
+if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd' ) )
 {
      $cmd = filter_input ( INPUT_GET, 'cmd' );     //Storing the command into a variable
 
      switch ( $cmd )
      {
          case 1:
-             user_login_control ( );        //Call to the user_login_control function
-             break;
-
-         case 2:
              user_contacts_control ( );          //Call to the user_contacts_control function
              break;
 
-         case 3:
+         case 2:
              edit_user_control ( );
              break;
          
-         case 4:
-             search_user_control ( );
+         case 3:
+             user_chats_control ( );
              break;
-
+         
          default :
              echo '{"result":0, "message": "Invalid Command Entered"}';
              break;
      }//end of switch()
+}
+else
+{
+    echo '{"result":0, "message": "user_id or cmd not set"}';
 }
 
 
@@ -45,42 +45,10 @@ if ( filter_input ( INPUT_GET, 'cmd' ) )
  */
 function get_user_model( )
 {
-    include_once '../models/users.php';     //Including the file users.php
+    require_once '../models/users.php';     //Including the file users.php
     $obj = new USERS ( );       //Creating an instance of the class users in users.php
     return $obj;
 }//end of get_users_model
-
-
-/*
- * Function to control the users login
- */
-function user_login_control ( )
-{
-    //Checking if username and password is set before proceeding
-    if ( filter_input ( INPUT_GET,'username') && filter_input ( INPUT_GET,'password' ) )
-    {
-        $obj = get_user_model ( );
-        $username = filter_input (INPUT_GET,'username');      //Getting the username from the url
-        $password = filter_input ( INPUT_GET,'password');      //Getting the password from the url
-        $row = $obj->user_login ( $username, $password );
-        if ( !$row )
-        {
-            echo '{"result":0, "message":"Login Error"}';       //Showing an error message in json format
-        }
-        else
-        {
-            session_start ( );      //Starting a session
-            $_SESSION['user_id'] = $row['user_id'];     //Storing the user's id into a session variable
-            $_SESSION['username'] = $row['username'];        //Storing the username into a session variable
-            echo '{"result":1, "message":"Correct Details"}';       //Showing a success message in json format
-        }
-    }
-    else
-    {
-        echo '{"result":0, "message":"Username and Password not set"}';
-    }
-}//end of user_login()
-
 
 
 /*
@@ -89,10 +57,10 @@ function user_login_control ( )
  */
 function user_contacts_control ( )
 {
-  session_start();
+  session_start ( );
     if ( isset ( $_SESSION['user_id'] ) )
     {
-        include_once '../models/contacts.php';
+        require_once '../models/contacts.php';
         $obj2 = new CONTACTS ( );
         $obj1 = get_user_model ( );
 //        $user_id = filter_input (INPUT_GET, 'id');
@@ -138,9 +106,9 @@ function user_contacts_control ( )
  */
 function edit_user_control ( )
 {
-    session_start();
-    if ( isset ( $_SESSION['user_id'] ) && filter_input (INPUT_GET, 'uername') &&
-         filter_input (INPUT_GET, 'password') &&filter_input (INPUT_GET, 'profile_pic'))
+    session_start ( );
+    if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'uername') &&
+         filter_input (INPUT_GET, 'password') &&filter_input (INPUT_GET, 'profile_pic') )
     {
         $obj = get_user_model( );
         $user_id = $_SESSION['user_id'];
@@ -165,37 +133,18 @@ function edit_user_control ( )
 
 
 /*
- * Function to control the searching of a new user
+ * Function to control and dispay the users chat contacts
  */
-function search_user_control ( )
+function user_chats_control ( )
 {
-    session_start();
-    if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'search' ) )
+    session_start ( );
+    if ( isset ( $_SESSION['user_id'] ) )
     {
-        $obj = get_user_model( );
-        $search = filter_input ( INPUT_GET, 'search' );
-        
-        if ( $obj->search_user ( $search ) )
-        {
-            echo '{"result":0, "contacts":[';
-            $row = $obj->fetch ( );
-            while ( $row )
-            {
-                echo json_encode ( $row );
-                if ( $row = $obj->fetch ( ) )
-                {
-                    echo ',';
-                }
-            }
-            echo ']}';
-        }
-        else
-        {
-            echo '{"result":0, "message":"Failed to search"}';
-        }
+        $obj = get_user_model ( );
+        print("Not implemented yet");
     }
     else
     {
-        echo '{"result":0, "message":"User id not in session or no search variable passed"}';
+        echo '{"result":0, "message":"User id not in session"}';
     }
-}//search_user_control()
+}//end of user_chats_control()
