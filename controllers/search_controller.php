@@ -6,10 +6,12 @@
  * and open the template in the editor.
  */
 
+session_start ( );
 if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd') )
 {
-    $cmd = filter_input ( INPUT_GET, 'cmd' );
-    
+    $cmd_sanitize = sanitizeString ( filter_input ( INPUT_GET, 'cmd' ) );
+    $cmd = intval ( $cmd_sanitize );
+    print $cmd;
     switch ( $cmd )
     {
         case 1:
@@ -29,6 +31,18 @@ else
 
 
 /*
+ * Function to sanitize command sent
+ */
+function sanitizeString ( $val )
+{
+    $val = stripslashes ( $val );
+    $val = strip_tags ( $val );
+    $val = htmlentities ( $val );
+    return $val;
+}//end of sanitizeCmd()
+
+
+/*
  * Function to create an instance of the users class
  */
 function get_user_model( )
@@ -44,11 +58,12 @@ function get_user_model( )
  */
 function search_user_control ( )
 {
-    session_start ( );
+    $obj = $search = '';
+    
     if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'search' ) )
     {
         $obj = get_user_model( );
-        $search = filter_input ( INPUT_GET, 'search' );
+        $search = sanitizeString ( filter_input ( INPUT_GET, 'search' ) );
         
         if ( $obj->search_user ( $search ) )
         {
