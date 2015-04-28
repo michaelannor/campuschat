@@ -20,7 +20,11 @@ if ( filter_input ( INPUT_GET, 'cmd') )
             echo '{"result":0, "message": "Invalid Command Entered"}';
             break;
     }//end of switch
-}//end of if
+}
+else
+{
+    echo '{"result":0, "message": "cmd not set"}';
+}
 
 
 /*
