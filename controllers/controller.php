@@ -106,7 +106,6 @@ function user_contacts_control ( )
  */
 function edit_user_control ( )
 {
-    session_start ( );
     if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'uername') &&
          filter_input (INPUT_GET, 'password') &&filter_input (INPUT_GET, 'profile_pic') )
     {
@@ -137,7 +136,6 @@ function edit_user_control ( )
  */
 function user_chats_control ( )
 {
-    session_start ( );
     if ( isset ( $_SESSION['user_id'] ) )
     {
         $obj = get_user_model ( );
