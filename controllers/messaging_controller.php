@@ -37,6 +37,18 @@ else
 
 
 /*
+ * Function to sanitize command sent
+ */
+function sanitizeString ( $val )
+{
+    $val = stripslashes ( $val );
+    $val = strip_tags ( $val );
+    $val = htmlentities ( $val );
+    return $val;
+}//end of sanitizeString()
+
+
+/*
  * Function to load chat history of a user and another user
  */
 function user_load_history ( )

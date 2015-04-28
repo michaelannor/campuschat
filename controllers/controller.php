@@ -13,8 +13,8 @@
 session_start();
 if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd' ) )
 {
-     $cmd = filter_input ( INPUT_GET, 'cmd' );     //Storing the command into a variable
-
+     $cmd_sanitize = sanitizeString ( filter_input ( INPUT_GET, 'cmd' ) );     //Storing the command into a variable
+     $cmd = intval ( $cmd_sanitize );
      switch ( $cmd )
      {
          case 1:
@@ -40,6 +40,17 @@ else
 }
 
 
+/*
+ * Function to sanitize command sent
+ */
+function sanitizeString ( $val )
+{
+    $val = stripslashes ( $val );
+    $val = strip_tags ( $val );
+    $val = htmlentities ( $val );
+    return $val;
+}//end of sanitizeString()
+
 
 /*
  * Function to create an instance of the users class
@@ -58,13 +69,17 @@ function get_user_model( )
  */
 function user_contacts_control ( )
 {
+    $obj1 = $obj2 = $user_id = $row = $row1 = '';
+    $user_id = $user_id_santize = '';
     if ( isset ( $_SESSION['user_id'] ) )
     {
         require_once '../models/contacts.php';
         $obj2 = new CONTACTS ( );
         $obj1 = get_user_model ( );
 //        $user_id = filter_input (INPUT_GET, 'id');
-        $user_id = $_SESSION['user_id'];        //Retrieving the value in the session and assigning it to a new variable
+        $user_id_sanitize = sanitizeString ( $_SESSION['user_id'] );        //Retrieving the value in the session and assigning it to a new variable
+        $user_id = intval ( $user_id_sanitize );
+        
         if ( $obj2->display_users_contacts ( $user_id ) )
           {
            $row = $obj2->fetch ( );       //Fetching the result
@@ -106,14 +121,18 @@ function user_contacts_control ( )
  */
 function edit_user_control ( )
 {
+    $obj = $user_id = $username = $password = $profile_pic = '';
+    $user_id_sanitize = '';
     if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'uername') &&
          filter_input (INPUT_GET, 'password') &&filter_input (INPUT_GET, 'profile_pic') )
     {
         $obj = get_user_model( );
-        $user_id = $_SESSION['user_id'];
-        $username = filter_input ( INPUT_GET, 'username' );
-        $password = filter_input ( INPUT_GET, 'password' );
-        $profile_pic = filter_input ( INPUT_GET, 'profile_pic' );
+        $user_id_sanitize = sanitizeString ( $_SESSION['user_id'] );
+        $username = sanitizeString ( filter_input ( INPUT_GET, 'username' ) );
+        $password = sanitizeString ( filter_input ( INPUT_GET, 'password' ) );
+        $profile_pic = sanitizeString ( filter_input ( INPUT_GET, 'profile_pic' ) );
+        
+        $user_id = intval ( $user_id_sanitize );
 
         if ( $obj->edit_user ( $user_id, $username, $password, $profile_pic ) )
         { 

@@ -9,9 +9,10 @@
 session_start ( );
 if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd') )
 {
+    $cmd = $cmd_sanitize = '';
     $cmd_sanitize = sanitizeString ( filter_input ( INPUT_GET, 'cmd' ) );
     $cmd = intval ( $cmd_sanitize );
-    print $cmd;
+ 
     switch ( $cmd )
     {
         case 1:
@@ -39,7 +40,7 @@ function sanitizeString ( $val )
     $val = strip_tags ( $val );
     $val = htmlentities ( $val );
     return $val;
-}//end of sanitizeCmd()
+}//end of sanitizeString()
 
 
 /*
@@ -58,7 +59,7 @@ function get_user_model( )
  */
 function search_user_control ( )
 {
-    $obj = $search = '';
+    $obj = $search = $row = '';
     
     if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'search' ) )
     {
