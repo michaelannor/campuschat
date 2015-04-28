@@ -30,7 +30,7 @@
 
         // Function to validate users
         function validateLogin(user, pass){
-				var theUrl="../controllers/controller.php?cmd=1&username="+user+"&password="+pass;
+				var theUrl="../controllers/login_controller.php?cmd=1&username="+user+"&password="+pass;
 				var obj=sendRequest(theUrl);		//send request to the above url
 				if(obj.result==1){					//check result
           window.location.replace("home.php");
@@ -40,7 +40,7 @@
 					//$("#divDesc").show();				//show the div element
 				}else{
 					//show error message
-          alert("login failed");
+          // alert("login failed");
 					// $("#divStatus").text("error while getting description");
 					// $("#divStatus").css("backgroundColor","red");
 				}

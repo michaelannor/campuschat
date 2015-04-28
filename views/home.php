@@ -58,7 +58,7 @@ session_start();
 
        // Function to display all contacts
        function displayContacts(){
-       var theUrl="../controllers/controller.php?cmd=2";
+       var theUrl="../controllers/controller.php?cmd=1";
        var obj=sendRequest(theUrl);		//send request to the above url
        var contactcard = "";
        if(obj.result===1){					//check result
@@ -86,7 +86,7 @@ session_start();
 
 
      function displayChats(){
-     var theUrl="../controllers/controller.php?cmd=2";
+     var theUrl="../controllers/controller.php?cmd=1";
      var obj=sendRequest(theUrl);		//send request to the above url
      var chatcard = "";
      if(obj.result===1){					//check result
