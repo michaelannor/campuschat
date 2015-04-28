@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+session_start();
 if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd' ) )
 {
     $cmd = filter_input ( INPUT_GET, 'cmd' );
@@ -29,7 +29,11 @@ if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd' ) )
             break;
     }//end of switch
     
-}//end of if
+}
+else
+{
+    echo '{"result":0, "message": "user_id or cmd not set"}';
+}
 
 
 /*

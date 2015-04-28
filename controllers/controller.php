@@ -10,6 +10,7 @@
 /*
  * Checking if a command is set before proceeding
  */
+session_start();
 if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd' ) )
 {
      $cmd = filter_input ( INPUT_GET, 'cmd' );     //Storing the command into a variable
@@ -57,7 +58,6 @@ function get_user_model( )
  */
 function user_contacts_control ( )
 {
-  session_start ( );
     if ( isset ( $_SESSION['user_id'] ) )
     {
         require_once '../models/contacts.php';

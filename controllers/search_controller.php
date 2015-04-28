@@ -21,7 +21,11 @@ if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd') )
             break;
     }//end of switch
     
-}//end of if
+}
+else
+{
+    echo '{"result":0, "message": "user_id or cmd not set"}';
+}
 
 
 /*
