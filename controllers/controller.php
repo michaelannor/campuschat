@@ -170,5 +170,32 @@ function edit_user_control ( )
 function search_user_control ( )
 {
     session_start();
-    $obj = get_user_model( );
+    if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'search' ) )
+    {
+        $obj = get_user_model( );
+        $search = filter_input ( INPUT_GET, 'search' );
+        
+        if ( $obj->search_user ( $search ) )
+        {
+            echo '{"result":0, "contacts":[';
+            $row = $obj->fetch ( );
+            while ( $row )
+            {
+                echo json_encode ( $row );
+                if ( $row = $obj->fetch ( ) )
+                {
+                    echo ',';
+                }
+            }
+            echo ']}';
+        }
+        else
+        {
+            echo '{"result":0, "message":"Failed to search"}';
+        }
+    }
+    else
+    {
+        echo '{"result":0, "message":"User id not in session or no search variable passed"}';
+    }
 }//search_user_control()
