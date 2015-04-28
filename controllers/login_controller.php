@@ -8,7 +8,9 @@
 
 if ( filter_input ( INPUT_GET, 'cmd') )
 {
-    $cmd = filter_input ( INPUT_GET, 'cmd' );
+    $cmd = $cmd_sanitize = '';
+    $cmd_sanitize = sanitizeString ( filter_input ( INPUT_GET, 'cmd' ) );
+    $cmd = intval ( $cmd_sanitize );
     
     switch ( $cmd )
     {
@@ -28,6 +30,18 @@ else
 
 
 /*
+ * Function to sanitize command sent
+ */
+function sanitizeString ( $val )
+{
+    $val = stripslashes ( $val );
+    $val = strip_tags ( $val );
+    $val = htmlentities ( $val );
+    return $val;
+}//end of sanitizeString()
+
+
+/*
  * Function to create an instance of the users class
  */
 function get_user_model( )
@@ -43,12 +57,13 @@ function get_user_model( )
  */
 function user_login_control ( )
 {
+    $obj = $username = $password = $row = '';
     //Checking if username and password is set before proceeding
     if ( filter_input ( INPUT_GET,'username') && filter_input ( INPUT_GET,'password' ) )
     {
         $obj = get_user_model ( );
-        $username = filter_input (INPUT_GET,'username');      //Getting the username from the url
-        $password = filter_input ( INPUT_GET,'password');      //Getting the password from the url
+        $username = sanitizeString ( filter_input (INPUT_GET,'username') );      //Getting the username from the url
+        $password = sanitizeString ( filter_input ( INPUT_GET,'password') );      //Getting the password from the url
         $row = $obj->user_login ( $username, $password );
         if ( !$row )
         {
