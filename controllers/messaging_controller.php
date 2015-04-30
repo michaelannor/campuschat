@@ -28,6 +28,10 @@ if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd' ) )
         case 4:
             user_delete_messages ( );
             break;
+        
+        case 5:
+            user_delete_message ( );
+            break;
 
         default:
             echo '{"result":0, "message": "Invalid Command Entered"}';
@@ -115,7 +119,7 @@ function user_receiving_message ( )
 
 
 /*
- * Function to control the deletion of a message
+ * Function to control the deletion of messages
  */
 function user_delete_messages ( )
 {
@@ -138,6 +142,33 @@ function user_delete_messages ( )
     else
     {
         echo '{"result":0, "message":"Variables not set thus user_id, msg_sender, msg_receiver"}';
+    }
+}//end of user_delete_message()
+
+
+/*
+ * Function to control the deletion of a message
+ */
+function user_delete_message ( )
+{
+    if ( isset ( $_SESSION ['user_id'] ) && filter_input ( INPUT_GET, 'msg_id' ) )
+    {
+        $obj = get_user_model ( );
+        $msg_id_sanitize = sanitizeString ( filter_input(INPUT_GET, 'msg_id' ) );
+        $msg_id = intval ( $msg_id_sanitize );
+        
+        if ( $obj->delete_message ( $msg_id ) )
+        {
+            echo '{"result":1, "message":"Message Deleted"}';
+        }
+        else
+        {
+            echo '{"result":0, "message":"Message not deleted"}';
+        }
+    }
+    else
+    {
+        echo '{"result":0, "message":"Variables not set thus user_id, msg_id"}';
     }
 }//end of user_delete_message()
 
