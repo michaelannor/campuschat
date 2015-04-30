@@ -7,6 +7,7 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
+
     </head>
 
     <body class="teal darken-1">
@@ -16,7 +17,7 @@
 
 
       <script>
-
+        // Function to send ajax request
         function sendRequest(u){
           // Send request to server
           //u a url as a string
@@ -27,6 +28,7 @@
           return result;	//return object
         }
 
+        // Function to validate users
         function validateLogin(user, pass){
 				var theUrl="../controllers/login_controller.php?cmd=1&username="+user+"&password="+pass;
 				var obj=sendRequest(theUrl);		//send request to the above url
@@ -44,6 +46,7 @@
 				}
 			}
 
+      // Login Button Onclick Function
       $(function(){
         $("#loginbtn").click(function(){
 
@@ -53,6 +56,14 @@
         });
       });
 
+      // Cancel Button Onclick Function
+      $(function(){
+        $("#cancelbtn").click(function(){
+          // alert();
+          $('#username').val('');
+          $('#password').val('');
+        });
+      });
 
       </script>
 
@@ -63,60 +74,55 @@
 
       <div class="row">
             <div class="col s12 m5">
+              <!-- Div for Login Card -->
               <div class="card-panel" style="width: 90%;
-    height: 310px;
-
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    margin: auto;">
-                <span class="teal-text">
-                  <div class="row">
-
+                height: 310px;
+                position: absolute;
+                top:0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;"
+              >
+              <span class="teal-text">
+                <div class="row">
                   <div class="row">
                       <form class="col s12">
                         <div class="row">
-                                                                              <div class="input-field col s12">
-
-                           <h5>Log In</h5>
-                            </div>
                           <div class="input-field col s12">
-
-
+                           <h5>Log In</h5>
+                          </div>
+                            <!-- Username Input -->
+                          <div class="input-field col s12">
                             <input id="username" type="text" class="validate">
                             <label for="username">Username</label>
                           </div>
 
-
+                          <!-- Password Input -->
                           <div class="input-field col s12">
                             <input id="password" type="password" class="validate">
                             <label for="password">Password</label>
                           </div>
-                                                    <div class="input-field col s12">
 
-                                                     <h6 id="loginbtn" style="float:right;"><span style="color: #009688 !important; ">LOGIN</span></h6><span>    </span> <h6 style="float:right; padding-right:30px;" class="grey-text"> CANCEL    </h6>
-
-                            </div>
+                          <!-- Login and Cancel Buttons -->
+                          <div class="input-field col s12">
+                              <!-- Login Button -->
+                              <h6 id="loginbtn" style="float:right;">
+                                <span style="color: #009688 !important; ">
+                                  LOGIN
+                                </span>
+                              </h6>
+                              <span></span>
+                              <!-- Cancel Button -->
+                              <h6 id="cancelbtn" style="float:right; padding-right:30px;" class="grey-text">
+                                CANCEL
+                              </h6>
+                          </div>
                         </div>
                         <div class="row">
-
-
-
                 </span>
               </div>
             </div>
           </div>
-
-
-
-
-
-
-
-
-
     </body>
   </html>
