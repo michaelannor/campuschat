@@ -8,7 +8,8 @@
 session_start();
 if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd' ) )
 {
-    $cmd = filter_input ( INPUT_GET, 'cmd' );
+    $cmd_sanitize = filter_input ( INPUT_GET, 'cmd' );
+    $cmd = intval ( $cmd_sanitize );
     
     switch ( $cmd )
     {
@@ -49,6 +50,17 @@ function sanitizeString ( $val )
 
 
 /*
+ * Function to create an instance of the users class
+ */
+function get_user_model( )
+{
+    require_once '../models/messages.php';     //Including the file users.php
+    $obj = new MESSAGES ( );       //Creating an instance of the class users in users.php
+    return $obj;
+}//end of get_users_model
+
+
+/*
  * Function to load chat history of a user and another user
  */
 function user_load_history ( )
@@ -62,7 +74,29 @@ function user_load_history ( )
  */
 function user_sending_message ( )
 {
-    
+    $obj = $msg_text = $msg_sender = $msg_receiver = $msg_type = '';
+    if ( filter_input ( INPUT_GET, 'msg_text' ) && filter_input ( INPUT_GET, 'msg_sender' ) &&
+            filter_input ( INPUT_GET, 'msg_receiver' ) && filter_input ( INPUT_GET, 'msg_type' ) )
+    {
+        $obj = get_user_model ( );
+        $msg_text = sanitizeString ( filter_input(INPUT_GET, 'msg_text' ) );
+        $msg_sender = sanitizeString ( filter_input(INPUT_GET, 'msg_sender' ) );
+        $msg_receiver = sanitizeString ( filter_input(INPUT_GET, 'msg_receiver' ) );
+        $msg_type = sanitizeString ( filter_input(INPUT_GET, 'msg_type' ) );
+
+        if ( $obj->send_message ( $msg_text, $msg_sender, $msg_receiver, $msg_type ) )
+        {
+            echo '{"result":1,"message":"Message sent"}';
+        }
+        else
+        {
+            echo '{"result":0, "message":"Message not sent"}';
+        }
+    }
+    else
+    {
+        echo '{"result":0, "message":"Variables not set thus msg_text, msg_sender, msg_receiver, msg_type"}';
+    }
 }//end of user_sending_message()
 
 
@@ -73,4 +107,12 @@ function user_receiving_message ( )
 {
     
 }//end of user_receiving_message()
+
+/*
+ * Function to control the deletion of a message
+ */
+function user_delete_message ( )
+{
+    
+}//end of user_delete_message()
 
