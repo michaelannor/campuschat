@@ -26,7 +26,8 @@ if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd' ) )
             break;
         
         case 4:
-            user_delete_message ( );
+            user_delete_messages ( );
+            break;
 
         default:
             echo '{"result":0, "message": "Invalid Command Entered"}';
@@ -112,18 +113,27 @@ function user_receiving_message ( )
     
 }//end of user_receiving_message()
 
+
 /*
  * Function to control the deletion of a message
  */
-function user_delete_message ( )
+function user_delete_messages ( )
 {
-    if ( isset ( $_SESSION ['user_id'] ) && filter_input ( INPUT_GET, 'msg_sender' ) &&
-            filter_input ( INPUT_GET, 'msg_receiver' ) )
+    if ( isset ( $_SESSION ['user_id'] ) && filter_input ( INPUT_GET, 'msg_receiver' ) )
     {
         $obj = get_user_model ( );
         $user_id_sanitize = sanitizeString ( $_SESSION['user_id'] );
         $user_id = intval ( $user_id_sanitize );
         $msg_receiver = sanitizeString ( filter_input(INPUT_GET, 'msg_receiver' ) );
+        
+        if ( $obj->delete_user_messages ( $user_id, $msg_receiver ) )
+        {
+            echo '{"result":1,"message":"Messages deleted"}';
+        }
+        else
+        {
+            echo '{"result":0, "message":"Messages not deleted"}';
+        }
     }
     else
     {
