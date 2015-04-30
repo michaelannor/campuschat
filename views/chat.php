@@ -138,26 +138,59 @@ session_start();
      <div class="row">
 
       <div class="row">
-         <div class="col s12">
+
+
+        <div class="row">
+  <div class="col s9 m5">
+    <div class="card-panel teal">
+      <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+      I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" >
+<div class="col s8 m5">
+<div class="card-panel orange" style="float:right;">
+<span class="white-text">I am a very simple card. I am good at containing small bits of information.
+I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+</span>
+</div>
+</div>
+</div>
+
+
+
+         <!-- <div class="col s12"> -->
            <!-- Tabs for Chats and Contacts -->
 
             <!-- <input > -->
 
-            <div id="chatbox" class="row">
-              <form class="col s11">
+            <!-- <div id="chatbox" class="row" style="position: fixed; bottom: 45px; right:24px;">
+              <form class="col s12">
                 <div class="row">
-                  <div class="input-field col s11">
+                  <div class="input-field col s12">
                     <textarea id="textarea1" class="materialize-textarea"></textarea>
                     <label for="textarea1">Textarea</label>
                   </div>
                 </div>
               </form>
-            </div>
 
+            </div> -->
 
-            <a class="btn-floating btn-large waves-effect waves-light teal"><i class="mdi-content-send"></i></a>
-
-         </div>
+        <div class="" style="bottom: 25px; right: 24px;">
+        <div class="input-field col s11">
+          <input id="email" type="email" class="validate">
+          <!-- <label for="email">Email</label> -->
+        </div>
+        <div class="input-field col s1">
+          <a style="float:right;" class="btn-floating waves-effect waves-light teal"><i class="mdi-content-send"></i></a>
+          <!-- <label for="email">Email</label> -->
+        </div>
+      </div>
+         <!-- </div> -->
 
      </div>
 
