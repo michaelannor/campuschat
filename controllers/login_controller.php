@@ -17,6 +17,10 @@ if ( filter_input ( INPUT_GET, 'cmd') )
         case 1:
             user_login_control ( );
             break;
+        
+        case 2:
+            user_signup_control ( );
+            break;
 
         default:
             echo '{"result":0, "message": "Invalid Command Entered"}';
@@ -82,3 +86,32 @@ function user_login_control ( )
         echo '{"result":0, "message":"Username and Password not set"}';
     }
 }//end of user_login()
+
+
+/*
+ * Function to control a user signing up
+ */
+function user_signup_control ( )
+{
+    $obj = $username = $password = $profile_pic = '';
+    if ( filter_input ( INPUT_GET, 'username' ) && filter_input ( INPUT_GET, 'password' ) &&
+            filter_input ( INPUT_GET, 'profile_pic' ) )
+    {
+        $obj = get_user_model ( );
+        $username = sanitizeString ( filter_input ( INPUT_GET, 'username' ) );
+        $password = sanitizeString ( filter_input ( INPUT_GET, 'password' ) );
+        $profile_pic = sanitizeString ( filter_input ( INPUT_GET, 'profile_pic' ) );
+        if ( $obj->user_signup ( $username, $password, $profile_pic ) )
+        {
+            echo '{"result":1,"message":"Successfully signedup"}';
+        }
+        else
+        {
+            echo '{"result":0, "message":"Failed to signup"}';
+        }
+    }
+    else
+    {
+        echo '{"result":0, "message":"Username, password and profile_pic not set"}';
+    }
+}//end of user_signup_control()
