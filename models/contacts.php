@@ -47,6 +47,4 @@ Class CONTACTS extends adb
         return $this->query($str_sql);
     }
     
-    
-    
 }

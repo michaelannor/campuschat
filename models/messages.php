@@ -57,6 +57,16 @@ Class MESSAGES extends adb
     }
     
     /*
+     * Function to delete selected messages
+     */
+    function delete_message($msg_id){
+        $str_sql = "DELETE from campuschat_messages where
+                   msg_id = $msg_id";
+        
+        return $this->query($str_sql);
+    }
+    
+    /*
      * Function to send meseeages
      */
     function send_message($msg_text, $msg_sender, $msg_receiver, $msg_type){
@@ -64,8 +74,30 @@ Class MESSAGES extends adb
                    msg_text = '$msg_text',
                    msg_sender =  $msg_sender,
                    msg_receiver = $msg_receiver,
-                   msg_type = $msg_type ";
+                   msg_type = $msg_type";
+        
+        return $this->query($str_sql);
+    }
+    
+    /*
+     * Function to get chat history of user
+     */
+    function get_chat_history($user_id){
+        $str_sql = "SELECT distinct msg_sender, msg_receiver, COUNT(msg_text), timestamp
+                    FROM campuschat_messages GROUP BY msg_receiver 
+                    HAVING msg_sender = $user_id or msg_receiver = $user_id
+                    ORDER BY timestamp DESC";
         
         return $this->query($str_sql);
     }
 }
+
+//$obj = new MESSAGES();
+//$obj->get_chat_history(1);
+//
+//$row = $obj->fetch();
+//
+//while ($row){
+//    echo $row['msg_sender']."<br>";
+//    $row = $obj->fetch();
+//}
