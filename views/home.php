@@ -7,7 +7,10 @@ session_start();
    else{
     //  echo $_SESSION['user_id'];
    }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/kennethBranch
  ?>
 
  <!DOCTYPE html>
@@ -37,11 +40,23 @@ session_start();
          return result;	//return object
        }
 
+<<<<<<< HEAD
+=======
+      //  $(document).ready(function()
+      //  {
+      //    displayContacts();
+      //  });
+
+>>>>>>> origin/kennethBranch
        $(document).ready(function()
        {
          displayChats();
        });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/kennethBranch
        // Contact Pane Onclick Function
        $(function(){
          $("#contacts-click").click(function(){
@@ -49,6 +64,10 @@ session_start();
          });
        });
 
+<<<<<<< HEAD
+=======
+       // Function to validate users
+>>>>>>> origin/kennethBranch
        // Chat Pane Onclick Function
        $(function(){
          $("#chats-click").click(function(){
@@ -57,12 +76,22 @@ session_start();
        });
 
        // Function to display all contacts
+<<<<<<< HEAD
        function displayContacts(){
        var theUrl="../controllers/controller.php?cmd=1";
+=======
+
+       function displayContacts(){
+       var theUrl="../controllers/controller.php?cmd=2";
+>>>>>>> origin/kennethBranch
        var obj=sendRequest(theUrl);		//send request to the above url
        var contactcard = "";
        if(obj.result===1){					//check result
          for(var index in obj.contacts){
+<<<<<<< HEAD
+=======
+           contactcard += "<div class='section col s12'>";
+>>>>>>> origin/kennethBranch
            contactcard += "<div id='"+ obj.contacts[index].user_id +"' class='section col s12'>";
            contactcard +=  "<div class='contactcardimg col s2'>";
            contactcard += "<img src='../assets/img/test.jpg' alt='' class='circle responsive-img'>";
@@ -74,6 +103,17 @@ session_start();
            contactcard +="<div class='divider col s12'></div><br><br><br><br>";
            contactcard +="</div>";
          }
+<<<<<<< HEAD
+=======
+        //  alert(contactcard);
+         $("#contacts").html(contactcard);
+        //  alert("after");
+        //  window.location.replace("home.php");
+         //$("#divDesc").text(obj.desc);		//set div with the description from the result
+         //$("#divDesc").css("top",event.y);	//set the location of the div
+         //$("#divDesc").css("left",event.x);
+         //$("#divDesc").show();				//show the div element
+>>>>>>> origin/kennethBranch
 
          $("#contacts").html(contactcard);
        }else{
@@ -86,7 +126,11 @@ session_start();
 
 
      function displayChats(){
+<<<<<<< HEAD
      var theUrl="../controllers/controller.php?cmd=1";
+=======
+     var theUrl="../controllers/controller.php?cmd=2";
+>>>>>>> origin/kennethBranch
      var obj=sendRequest(theUrl);		//send request to the above url
      var chatcard = "";
      if(obj.result===1){					//check result
@@ -111,8 +155,11 @@ session_start();
      }
    }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/kennethBranch
        </script>
 
     <!-- Navigation Menu -->
