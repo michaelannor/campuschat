@@ -92,7 +92,6 @@ function user_contacts_control ( )
                {
                    while ( $row1 =  $obj1->fetch ( ) )
                    {
-                       echo '{"user_id":"'.$row['user_receiver'].'", "username":"'.$row1['username'].'"}';
                    }
                }
 
