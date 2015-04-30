@@ -44,17 +44,15 @@ session_start();
 
        // Contact Pane Onclick Function
        $(function(){
-         $("#signupbtn").click(function(){
-           //displayContacts();
-           window.location.replace("home.php");
+         $("#contacts-click").click(function(){
+           displayContacts();
          });
        });
 
        // Chat Pane Onclick Function
        $(function(){
-         $("#cancelbtn").click(function(){
-          //  displayChats();
-          window.location.replace("login.php");
+         $("#chats-click").click(function(){
+           displayChats();
          });
        });
 
@@ -140,90 +138,27 @@ session_start();
      <div class="row">
 
       <div class="row">
-
-
-
          <div class="col s12">
-           <!-- Tabs for Chats and Contacts --><div class="col s12"><br></div>
-           <div class="row">
-               <form class="col s12">
-                 <div class="row">
+           <!-- Tabs for Chats and Contacts -->
 
-                   <div class="input-field col s12">
-                     <input id="last_name" type="text" class="validate">
-                     <label for="last_name">First Name</label>
-                   </div>
-                 </div>
+            <!-- <input > -->
 
-                 <div class="row">
-
-                   <div class="input-field col s12">
-                     <input id="last_name" type="text" class="validate">
-                     <label for="last_name">Last Name</label>
-                   </div>
-                 </div>
-
-                 <div class="row">
-                   <div class="input-field col s12">
-                     <input id="password" type="text" class="validate">
-                     <label for="password">User Name</label>
-
-                   </div>
-                 </div>
-                 <div class="row">
-                   <div class="input-field col s12">
-                     <input id="email" type="password" class="validate">
-                     <label for="email">Password</label>
-                   </div>
-                 </div>
-           <!--Social      -->
-
-           <h6 id="signupbtn" style="float:right;"><span style="color: #009688 !important; padding-right:10px;">SIGN UP</span></h6>
-           <h6 id="cancelbtn" style="float:right;"><span style="color: #009688 !important; padding-right:10px;">CANCEL &nbsp;&nbsp;&nbsp;&nbsp;</span></h6>
-               </form>
-             </div>
+            <div id="chatbox" class="row">
+              <form class="col s11">
+                <div class="row">
+                  <div class="input-field col s11">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Textarea</label>
+                  </div>
+                </div>
+              </form>
+            </div>
 
 
-
-
-
+            <a class="btn-floating btn-large waves-effect waves-light teal"><i class="mdi-content-send"></i></a>
 
          </div>
 
-         <!-- Chat Tab Contents -->
-         <!-- <div id="chats" class="col s12">
-
-         </div> -->
-
-         <!-- Contact Tab Contents -->
-         <!-- <div id="contacts" class="col s12"> -->
-
-          <!-- <div class="section col s12">
-            <div class="contactcardimg col s2">
-                <img src="../assets/img/test.jpg" alt="" class="circle responsive-img">
-            </div>
-
-            <div class="contactcardtext col s10">
-              <h6 class="teal-text">Contact Name 2</h6>
-              <p>Status: Offline</p>
-            </div>
-            <div class="divider col s12"></div><br><br><br><br>
-          </div>
-
-
-          <div class="section row col s12">
-            <div class="contactcardimg col s2">
-                <img src="../assets/img/test.jpg" alt="" class="circle responsive-img">
-            </div>
-
-            <div class="contactcardtext col s10">
-              <h6 class="teal-text">Contact Name 2</h6>
-              <p>Status: Offline</p>
-            </div>
-            <div class="divider col s12"></div><br><br><br><br>
-          </div> -->
-
-       <!-- </div> -->
      </div>
 
 
