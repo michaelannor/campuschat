@@ -74,7 +74,7 @@ Class MESSAGES extends adb
                    msg_text = '$msg_text',
                    msg_sender =  $msg_sender,
                    msg_receiver = $msg_receiver,
-                   msg_type = $msg_type";
+                   msg_type = '$msg_type'";
         
         return $this->query($str_sql);
     }
@@ -94,7 +94,7 @@ Class MESSAGES extends adb
 
 //$obj = new MESSAGES();
 //$obj->get_chat_history(1);
-//
+//$obj->send_message('HEY man', 4, 2, 'TEXT');
 //$row = $obj->fetch();
 //
 //while ($row){
