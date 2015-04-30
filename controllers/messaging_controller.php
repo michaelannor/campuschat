@@ -24,6 +24,9 @@ if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd' ) )
         case 3:
             user_receiving_message ( );
             break;
+        
+        case 4:
+            user_delete_message ( );
 
         default:
             echo '{"result":0, "message": "Invalid Command Entered"}';
@@ -75,16 +78,17 @@ function user_load_history ( )
 function user_sending_message ( )
 {
     $obj = $msg_text = $msg_sender = $msg_receiver = $msg_type = '';
-    if ( filter_input ( INPUT_GET, 'msg_text' ) && filter_input ( INPUT_GET, 'msg_sender' ) &&
+    if ( isset ( $_SESSION ['user_id'] ) && filter_input ( INPUT_GET, 'msg_text' ) &&
             filter_input ( INPUT_GET, 'msg_receiver' ) && filter_input ( INPUT_GET, 'msg_type' ) )
     {
         $obj = get_user_model ( );
+        $user_id_sanitize = sanitizeString ( $_SESSION['user_id'] );
+        $user_id = intval ( $user_id_sanitize );
         $msg_text = sanitizeString ( filter_input(INPUT_GET, 'msg_text' ) );
-        $msg_sender = sanitizeString ( filter_input(INPUT_GET, 'msg_sender' ) );
         $msg_receiver = sanitizeString ( filter_input(INPUT_GET, 'msg_receiver' ) );
         $msg_type = sanitizeString ( filter_input(INPUT_GET, 'msg_type' ) );
 
-        if ( $obj->send_message ( $msg_text, $msg_sender, $msg_receiver, $msg_type ) )
+        if ( $obj->send_message ( $msg_text, $user_id, $msg_receiver, $msg_type ) )
         {
             echo '{"result":1,"message":"Message sent"}';
         }
@@ -95,7 +99,7 @@ function user_sending_message ( )
     }
     else
     {
-        echo '{"result":0, "message":"Variables not set thus msg_text, msg_sender, msg_receiver, msg_type"}';
+        echo '{"result":0, "message":"Variables not set thus user_id, msg_text, msg_sender, msg_receiver, msg_type"}';
     }
 }//end of user_sending_message()
 
@@ -113,6 +117,17 @@ function user_receiving_message ( )
  */
 function user_delete_message ( )
 {
-    
+    if ( isset ( $_SESSION ['user_id'] ) && filter_input ( INPUT_GET, 'msg_sender' ) &&
+            filter_input ( INPUT_GET, 'msg_receiver' ) )
+    {
+        $obj = get_user_model ( );
+        $user_id_sanitize = sanitizeString ( $_SESSION['user_id'] );
+        $user_id = intval ( $user_id_sanitize );
+        $msg_receiver = sanitizeString ( filter_input(INPUT_GET, 'msg_receiver' ) );
+    }
+    else
+    {
+        echo '{"result":0, "message":"Variables not set thus user_id, msg_sender, msg_receiver"}';
+    }
 }//end of user_delete_message()
 
