@@ -41,6 +41,12 @@ session_start();
       //    displayContacts();
       //  });
 
+       $(document).ready(function()
+       {
+         displayChats();
+       });
+
+
        // Contact Pane Onclick Function
        $(function(){
          $("#contacts-click").click(function(){
@@ -49,6 +55,15 @@ session_start();
        });
 
        // Function to validate users
+       // Chat Pane Onclick Function
+       $(function(){
+         $("#chats-click").click(function(){
+           displayChats();
+         });
+       });
+
+       // Function to display all contacts
+
        function displayContacts(){
        var theUrl="../controllers/controller.php?cmd=2";
        var obj=sendRequest(theUrl);		//send request to the above url
@@ -56,6 +71,7 @@ session_start();
        if(obj.result===1){					//check result
          for(var index in obj.contacts){
            contactcard += "<div class='section col s12'>";
+           contactcard += "<div id='"+ obj.contacts[index].user_id +"' class='section col s12'>";
            contactcard +=  "<div class='contactcardimg col s2'>";
            contactcard += "<img src='../assets/img/test.jpg' alt='' class='circle responsive-img'>";
            contactcard += "</div>";
@@ -74,6 +90,8 @@ session_start();
          //$("#divDesc").css("top",event.y);	//set the location of the div
          //$("#divDesc").css("left",event.x);
          //$("#divDesc").show();				//show the div element
+
+         $("#contacts").html(contactcard);
        }else{
          //show error message
          alert("failed");
@@ -82,6 +100,32 @@ session_start();
        }
      }
 
+
+     function displayChats(){
+     var theUrl="../controllers/controller.php?cmd=2";
+     var obj=sendRequest(theUrl);		//send request to the above url
+     var chatcard = "";
+     if(obj.result===1){					//check result
+       for(var index in obj.contacts){
+         chatcard += "<div id='"+ obj.contacts[index].user_id +"' class='section col s12'>";
+         chatcard +=  "<div class='contactcardimg col s2'>";
+         chatcard += "<img src='../assets/img/test.jpg' alt='' class='circle responsive-img'>";
+         chatcard += "</div>";
+         chatcard +="<div class='contactcardtext col s10'>";
+         chatcard +="<h6 class='teal-text'>Message Sender" + "</h6>";
+         chatcard +="<p>Snippet of message...</p>";
+         chatcard +="</div>";
+         chatcard +="<div class='divider col s12'></div><br><br><br><br>";
+         chatcard +="</div>";
+       }
+      //  alert(contactcard);
+       $("#chats").html(chatcard);
+
+     }else{
+       //show error message
+       alert("failed");
+     }
+   }
 
        </script>
 

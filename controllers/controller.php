@@ -102,7 +102,6 @@ function user_contacts_control ( )
 
 //        $user_id = filter_input (INPUT_GET, 'id');
 
-        // $user_id = filter_input (INPUT_GET, 'id');
 
         $user_id = $_SESSION['user_id'];        //Retrieving the value in the session and assigning it to a new variable
         if ( $obj2->display_users_contacts ( $user_id ) )
