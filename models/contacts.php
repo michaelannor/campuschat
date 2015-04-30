@@ -47,4 +47,18 @@ Class CONTACTS extends adb
         return $this->query($str_sql);
     }
     
+    
+    /*
+     * Function to add contacts
+     */
+    function add_contacts($user_sender, $user_receiver)
+    {
+        $str_sql = "INSERT INTO campuschat_contacts SET
+                    user_sender = $user_sender,
+                    user_receiver = $user_receiver";
+        
+        return $this->query($str_sql);
+    }
+    
 }
+
