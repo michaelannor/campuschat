@@ -41,7 +41,9 @@ Class MESSAGES extends adb
     function get_user_messages($msg_sender, $msg_receiver){
         
         $str_sql = "SELECT * from campuschat_messages where
-                   msg_sender = $msg_sender and msg_receiver = $msg_receiver";
+                   msg_sender = $msg_sender and msg_receiver = $msg_receiver
+                   or msg_sender = $msg_receiver and msg_receiver = $msg_sender
+                  ORDER BY timestamp ASC LIMIT 0,20";
         
         return $this->query($str_sql);
     }
@@ -89,6 +91,15 @@ Class MESSAGES extends adb
                     ORDER BY timestamp DESC";
         
         return $this->query($str_sql);
+    }
+    
+    /*
+     * Function to get chat history list
+     */
+    function get_history_list($user_id){
+        $str_sql = "SELECT distinct ";
+        
+         return $this->query($str_sql);
     }
 }
 
