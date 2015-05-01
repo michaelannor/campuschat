@@ -83,8 +83,8 @@ function user_loadchat_history ( )
         if ( $obj->get_user_messages ( $user_id, $msg_receiver ) )
         {
             echo '{"result":1, "chats":[';
-            
-            while ( $row = $obj->fetch ( ) )
+            $row = $obj->fetch ( );
+            while ( $row )
             {
                 echo json_encode ( $row );
                 
