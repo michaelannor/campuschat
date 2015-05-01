@@ -14,7 +14,7 @@ if ( isset ( $_SESSION['user_id'] ) && filter_input ( INPUT_GET, 'cmd' ) )
     switch ( $cmd )
     {
         case 1:
-            user_load_history ( );
+            user_loadchat_history ( );
             break;
         
         case 2:
@@ -71,9 +71,39 @@ function get_user_model( )
 /*
  * Function to load chat history of a user and another user
  */
-function user_load_history ( )
+function user_loadchat_history ( )
 {
-    
+     if ( isset ( $_SESSION ['user_id'] ) && filter_input ( INPUT_GET, 'msg_receiver' ) )
+    {
+        $obj = get_user_model ( );
+        $user_id_sanitize = sanitizeString ( $_SESSION['user_id'] );
+        $user_id = intval ( $user_id_sanitize );
+        $msg_receiver = sanitizeString ( filter_input(INPUT_GET, 'msg_receiver' ) );
+        
+        if ( $obj->get_user_messages ( $user_id, $msg_receiver ) )
+        {
+            echo '{"result":1, "chats":[';
+            
+            while ( $row = $obj->fetch ( ) )
+            {
+                echo json_encode ( $row );
+                
+                if ( $row = $obj->fetch ( ) )
+                {
+                    echo ',';
+                }
+            }
+            echo ']}';
+        }
+        else
+        {
+            echo '{"result":0, "message":"Failed to load chat history"}';
+        }
+    }
+    else
+    {
+        echo '{"result":0, "message":"Variables not set thus user_id, msg_sender"}';
+    }
 }//end of user_load_history()
 
 
@@ -141,7 +171,7 @@ function user_delete_messages ( )
     }
     else
     {
-        echo '{"result":0, "message":"Variables not set thus user_id, msg_sender, msg_receiver"}';
+        echo '{"result":0, "message":"Variables not set thus user_id, msg_receiver"}';
     }
 }//end of user_delete_message()
 
