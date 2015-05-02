@@ -105,7 +105,7 @@ function user_signup_control ( )
 //        $row = $obj->add_user ( $username, $password, $profile_pic, $status );
         if (  !$obj->add_user ( $username, $password, $profile_pic, $status ) )
         {
-            echo '{"result":1,"message":"Successfully signedup"}';
+            echo '{"result":1,"message":"Signup Successful"}';
         }
         else
         {
