@@ -36,6 +36,19 @@ Class USERS extends adb
     
     
     /*
+     * Function to add a new user
+     */
+    function add_user($username, $password, $profile_pic, $status){
+        $str_sql = "INSERT INTO campuschat_users SET
+                username = '$username',
+                password = MD5('$password'),
+                profile_pic = '$profile_pic',
+                status = '$status'";
+        
+        $this->query($str_sql);
+    }
+    
+    /*
      * Function to allow user to login
      */
     function user_login ( $username, $password )
@@ -55,14 +68,16 @@ Class USERS extends adb
     /*
      * Function to get users profile information
      */
+
     function get_user_profile($user_id){
-       $str_sql = "SELECT username, profile_pic 
+       $str_sql = "SELECT username, profile_pic, status 
                         FROM campuschat_users
                         WHERE user_id = $user_id"; 
        
        return $this->query($str_sql);
+
     }
-    
+ 
     /*
      * Function to edit a users profile
      */
@@ -91,7 +106,8 @@ Class USERS extends adb
 }//end of USERS
 
 //include_once 'contacts.php';
-//$obj1 = new USERS();
+//$obj = new USERS();
+//$obj->add_user('Derrick.Odonkor', 'Derrick.Odonkor','','ONLINE' );
 //$obj2 = new CONTACTS();
 //
 //

@@ -93,17 +93,19 @@ function user_login_control ( )
  */
 function user_signup_control ( )
 {
-    $obj = $username = $password = $profile_pic = '';
+    $obj = $username = $password = $profile_pic = $status = '';
     if ( filter_input ( INPUT_GET, 'username' ) && filter_input ( INPUT_GET, 'password' ) &&
-            filter_input ( INPUT_GET, 'profile_pic' ) )
+            filter_input ( INPUT_GET, 'profile_pic' ) && filter_input ( INPUT_GET, 'status' ) )
     {
         $obj = get_user_model ( );
         $username = sanitizeString ( filter_input ( INPUT_GET, 'username' ) );
         $password = sanitizeString ( filter_input ( INPUT_GET, 'password' ) );
         $profile_pic = sanitizeString ( filter_input ( INPUT_GET, 'profile_pic' ) );
-        if ( $obj->user_signup ( $username, $password, $profile_pic ) )
+        $status = sanitizeString ( filter_input ( INPUT_GET, 'status' ) );
+//        $row = $obj->add_user ( $username, $password, $profile_pic, $status );
+        if (  !$obj->add_user ( $username, $password, $profile_pic, $status ) )
         {
-            echo '{"result":1,"message":"Successfully signedup"}';
+            echo '{"result":1,"message":"Signup Successful"}';
         }
         else
         {
