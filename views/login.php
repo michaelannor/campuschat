@@ -97,7 +97,7 @@
                           </div>
                                                     <div class="input-field col s12">
 
-                                                     <h6 id="loginbtn" style="float:right;"><span style="color: #009688 !important; ">LOGIN</span></h6><span>    </span> <h6 style="float:right; padding-right:30px;" class="grey-text"> CANCEL    </h6>
+                                                     <h6 id="loginbtn" style="float:right;"><span style="color: #009688 !important; ">LOGIN</span></h6><span>    </span> <h6 id="signupbtn" style="float:right; padding-right:30px;" class="grey-text"> CANCEL    </h6>
 
                             </div>
                         </div>

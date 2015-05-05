@@ -140,26 +140,24 @@ session_start();
       <div class="row">
 
 
-        <div class="row">
-  <div class="col s9 m5">
+        <!-- <div class="row"> -->
+  <div class="col s9 m5" style="float:left;">
     <div class="card-panel teal">
       <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-      I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
       </span>
     </div>
   </div>
-</div>
+<!-- </div> -->
 
 
-<div class="row" >
-<div class="col s8 m5">
-<div class="card-panel orange" style="float:right;">
-<span class="white-text">I am a very simple card. I am good at containing small bits of information.
-I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+<!-- <div class="row" > -->
+<div class="col s8 m5" style="float:right;">
+<div class="card-panel orange" >
+<span class="white-text">I am similar to what is called a panel in other frameworks.
 </span>
 </div>
 </div>
-</div>
+<!-- </div> -->
 
 
 
