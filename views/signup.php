@@ -1,16 +1,4 @@
-<?php
-session_start();
- 	if(!isset($_SESSION['user_id'])){
- 		header("location: login.php");
- 		exit();
- 	}
-   else{
-    //  echo $_SESSION['user_id'];
-   }
-
- ?>
-
- <!DOCTYPE html>
+<!DOCTYPE html>
  <html>
    <head>
      <!--Import materialize.css-->
@@ -28,25 +16,28 @@ session_start();
      <script>
        // Function to send ajax request
        function sendRequest(u){
-         // Send request to server
-         //u a url as a string
-         //async is type of request
          var obj=$.ajax({url:u,async:false});
-         //Convert the JSON string to object
          var result=$.parseJSON(obj.responseText);
          return result;	//return object
        }
 
        $(document).ready(function()
        {
-         displayChats();
+        //  displayChats();
        });
 
        // Contact Pane Onclick Function
        $(function(){
          $("#signupbtn").click(function(){
+           signUp(
+             $("#username").val(),
+             $("#password").val(),
+             $("#profile_pic").val(),
+             $("#status").val()
+           );
            //displayContacts();
-           window.location.replace("home.php");
+           validateLogin($("#username").val(), $("#password").val());
+          //  window.location.replace("home.php");
          });
        });
 
@@ -58,60 +49,42 @@ session_start();
          });
        });
 
-       // Function to display all contacts
-       function displayContacts(){
-       var theUrl="../controllers/controller.php?cmd=1";
+       // Function to signup user
+       function signUp(user, pass, pic, stat){
+       var theUrl="../controllers/login_controller.php?cmd=2&username="+user+"&password="+pass+"&profile_pic="+pic+"&status="+stat;
        var obj=sendRequest(theUrl);		//send request to the above url
-       var contactcard = "";
+
        if(obj.result===1){					//check result
-         for(var index in obj.contacts){
-           contactcard += "<div id='"+ obj.contacts[index].user_id +"' class='section col s12'>";
-           contactcard +=  "<div class='contactcardimg col s2'>";
-           contactcard += "<img src='../assets/img/test.jpg' alt='' class='circle responsive-img'>";
-           contactcard += "</div>";
-           contactcard +="<div class='contactcardtext col s10'>";
-           contactcard +="<h6 class='teal-text'>" + obj.contacts[index].username + "</h6>";
-           contactcard +="<p>Status: Offline</p>";
-           contactcard +="</div>";
-           contactcard +="<div class='divider col s12'></div><br><br><br><br>";
-           contactcard +="</div>";
+          alert(obj.message);
+          window.location.replace("home.php");
          }
 
-         $("#contacts").html(contactcard);
-       }else{
-         //show error message
-         alert("failed");
+        //  $("#contacts").html(contactcard);
+       else{
+         // show error message
+         alert(obj.message);
          // $("#divStatus").text("error while getting description");
          // $("#divStatus").css("backgroundColor","red");
        }
      }
 
 
-     function displayChats(){
-     var theUrl="../controllers/controller.php?cmd=1";
+     function validateLogin(user, pass){
+     var theUrl="../controllers/login_controller.php?cmd=1&username="+user+"&password="+pass;
      var obj=sendRequest(theUrl);		//send request to the above url
-     var chatcard = "";
-     if(obj.result===1){					//check result
-       for(var index in obj.contacts){
-         chatcard += "<div id='"+ obj.contacts[index].user_id +"' class='section col s12'>";
-         chatcard +=  "<div class='contactcardimg col s2'>";
-         chatcard += "<img src='../assets/img/test.jpg' alt='' class='circle responsive-img'>";
-         chatcard += "</div>";
-         chatcard +="<div class='contactcardtext col s10'>";
-         chatcard +="<h6 class='teal-text'>Message Sender" + "</h6>";
-         chatcard +="<p>Snippet of message...</p>";
-         chatcard +="</div>";
-         chatcard +="<div class='divider col s12'></div><br><br><br><br>";
-         chatcard +="</div>";
-       }
-      //  alert(contactcard);
-       $("#chats").html(chatcard);
-
+     if(obj.result==1){					//check result
+       window.location.replace("home.php");
+       //$("#divDesc").text(obj.desc);		//set div with the description from the result
+       //$("#divDesc").css("top",event.y);	//set the location of the div
+       //$("#divDesc").css("left",event.x);
+       //$("#divDesc").show();				//show the div element
      }else{
        //show error message
-       alert("failed");
+       // alert("login failed");
+       // $("#divStatus").text("error while getting description");
+       // $("#divStatus").css("backgroundColor","red");
      }
-   }
+     }
 
 
 
@@ -150,30 +123,30 @@ session_start();
                  <div class="row">
 
                    <div class="input-field col s12">
-                     <input id="last_name" type="text" class="validate">
-                     <label for="last_name">First Name</label>
+                     <input id="username" type="text" class="validate">
+                     <label for="username">Username</label>
                    </div>
                  </div>
 
                  <div class="row">
 
                    <div class="input-field col s12">
-                     <input id="last_name" type="text" class="validate">
-                     <label for="last_name">Last Name</label>
+                     <input id="password" type="password" class="validate">
+                     <label for="password">Password</label>
                    </div>
                  </div>
 
                  <div class="row">
                    <div class="input-field col s12">
-                     <input id="password" type="text" class="validate">
-                     <label for="password">User Name</label>
+                     <input id="profile_pic" type="text" class="validate">
+                     <label for="profile_pic">Profile Picture</label>
 
                    </div>
                  </div>
                  <div class="row">
                    <div class="input-field col s12">
-                     <input id="email" type="password" class="validate">
-                     <label for="email">Password</label>
+                     <input id="status" type="text" class="validate">
+                     <label for="status">Status</label>
                    </div>
                  </div>
            <!--Social      -->
