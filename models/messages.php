@@ -94,10 +94,23 @@ Class MESSAGES extends adb
     }
     
     /*
-     * Function to get chat history list
+     * Function to get chat history list messages sent
      */
-    function get_history_list($user_id){
-        $str_sql = "SELECT distinct ";
+    function get_history_messages_sent($user_id){
+        $str_sql = "SELECT distinct msg_sender, msg_receiver, COUNT(msg_text), timestamp 
+                    FROM campuschat_messages GROUP BY msg_receiver,msg_receiver 
+                    HAVING msg_sender = $user_id ORDER BY timestamp DESC";
+        
+         return $this->query($str_sql);
+    }
+    
+    /*
+     * Function to get chat history list messages received
+     */
+    function get_history_messages_received($user_id){
+        $str_sql = "SELECT distinct msg_sender, msg_receiver, COUNT(msg_text), timestamp 
+                    FROM campuschat_messages GROUP BY msg_receiver,msg_receiver 
+                    HAVING msg_receiver = $user_id ORDER BY timestamp DESC";
         
          return $this->query($str_sql);
     }
