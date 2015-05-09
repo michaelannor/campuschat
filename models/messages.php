@@ -98,7 +98,7 @@ Class MESSAGES extends adb
      */
     function get_history_messages_sent($user_id){
         $str_sql = "SELECT distinct msg_sender, msg_receiver, COUNT(msg_text), timestamp 
-                    FROM campuschat_messages GROUP BY msg_receiver,msg_receiver 
+                    FROM campuschat_messages GROUP BY msg_receiver, msg_sender 
                     HAVING msg_sender = $user_id ORDER BY timestamp DESC";
         
          return $this->query($str_sql);
@@ -109,15 +109,15 @@ Class MESSAGES extends adb
      */
     function get_history_messages_received($user_id){
         $str_sql = "SELECT distinct msg_sender, msg_receiver, COUNT(msg_text), timestamp 
-                    FROM campuschat_messages GROUP BY msg_receiver,msg_receiver 
+                    FROM campuschat_messages GROUP BY msg_receiver, msg_sender 
                     HAVING msg_receiver = $user_id ORDER BY timestamp DESC";
         
-         return $this->query($str_sql);
+        return $this->query($str_sql);
     }
 }
 
 //$obj = new MESSAGES();
-//$obj->get_chat_history(1);
+//$obj->get_history_messages_sent(2);
 //$obj->send_message('HEY man', 4, 2, 'TEXT');
 //$row = $obj->fetch();
 //
